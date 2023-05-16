@@ -1,6 +1,15 @@
-@import "variaveis.scss";
+@import "vars.scss";
 
 * {
-  font-family: "Biennale Regular";
+  font-family: $regularFont;
   font-size: 14px;
 }
+
+.avatar{
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+@import "#/fonts/fonts.scss";
+@import "@/components/button/button.scss";
