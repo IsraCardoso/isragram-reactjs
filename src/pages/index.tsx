@@ -1,22 +1,28 @@
-import { Inter } from "next/font/google";
 import Button from "@/components/button";
 import Avatar from "@/components/avatar";
-
-const inter = Inter({ subsets: ["latin"] });
+import ImageUploader from "@/components/imageUploader";
+import { useRef, useState } from "react";
 
 export default function Home() {
+  const [image, setImage] = useState(null);
+  const ImageInputRefOnParent = useRef<HTMLInputElement>(null);
   return (
     <>
       <h1> Teste</h1>
-      <Avatar/>
-      <Button
-        text={"Login"}
-        disabled={false}
-        variant={"inverted"}
-        onClick={() => {
-          console.log("clicou");
-        }}
+      <button onClick={() => ImageInputRefOnParent.current?.click()}>
+        Aqui
+      </button>
+
+      <ImageUploader
+        setImage={setImage}
+        imagePreview={image?.preview}
+        onSetReference={(inputRef) =>
+          (ImageInputRefOnParent.current = inputRef)
+        }
       />
+      <Avatar />
+      <Button text={"Login"} disabled={false} variant={"inverted"} />
+      <div>{JSON.stringify(image?.preview)}</div>
     </>
   );
 }
