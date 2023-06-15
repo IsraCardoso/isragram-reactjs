@@ -7,16 +7,37 @@ import Image from "next/image";
 import Button from "@/components/button";
 import Link from "next/link";
 import { validateEmail, validatePassword } from "@/utils/validators";
+import UserService from "@/services/UserService";
+
+const UserServiceInstance = new UserService();
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formValidation = () => {
     return validateEmail(loginEmail) && validatePassword(loginPassword);
   };
 
-  
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!formValidation()) {
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      console.log(loginEmail, loginPassword);
+      await UserServiceInstance.login({
+        login: loginEmail,
+        password: loginPassword,
+      });
+      alert("Login successful!");
+    } catch (error) {
+      alert("Erro ao realizar o login. " + error?.response?.data?.error);
+    }
+    setIsSubmitting(false);
+  };
 
   return (
     <section className="loginSection publicPage">
@@ -24,8 +45,7 @@ export default function Login() {
         <Image src={imagemLogo} alt="Isragram logo" fill className="logo" />
       </div>
       <div className="loginInfoContainer">
-        <form action="">
-          <p>{JSON.stringify(process.env.PUBLIC_API_URL)}</p>
+        <form onSubmit={onFormSubmit}>
           <PublicInput
             iconImage={imagemEnvelope}
             inputPlaceholder="Email"
@@ -48,7 +68,11 @@ export default function Login() {
             }
             validationMessage="Password must contain: 1 uppercase, 1 lowercase, 1 number and at least 4 characters"
           />
-          <Button type="submit" text="Login" disabled={!formValidation()} />
+          <Button
+            type="submit"
+            text="Login"
+            disabled={!formValidation() || isSubmitting}
+          />
         </form>
         <div className="loginFooter">
           <p>Don't have an account?</p>

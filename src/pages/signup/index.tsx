@@ -21,13 +21,14 @@ import UserService from "@/services/UserService";
 const UserServiceInstance = new UserService();
 
 export default function Login() {
+  const [signupAvatar, setSignupAvatar] = useState(null);
+  const [signupName, setSignupName] = useState("");
+  const [signupUsername, setSignupUsername] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPasswordConfirmation, setSignupPasswordConfirmation] =
     useState("");
-  const [signupName, setSignupName] = useState("");
-  const [signupUsername, setSignupUsername] = useState("");
-  const [signupAvatar, setSignupAvatar] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formValidation = () => {
     return (
@@ -39,10 +40,31 @@ export default function Login() {
     );
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
+    if (!formValidation()) {
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const RegisterBody = new FormData();
+      if (signupAvatar?.rawFile) {
+        RegisterBody.append("file", signupAvatar.rawFile);
+      }
+      RegisterBody.append("name", signupName);
+      RegisterBody.append("username", signupUsername);
+      RegisterBody.append("email", signupEmail);
+      RegisterBody.append("password", signupPassword);
+      console.log(RegisterBody);
+      await UserServiceInstance.register(RegisterBody);
+      alert("Account created successfully!");
+      //agora autenticar
+    } catch (error) {
+      alert(`Error trying to sign up. ` + error?.response?.data?.error);
+    }
+    setIsSubmitting(false);
+  };
 
-  }
   return (
     <section className="signupSection publicPage">
       <div className="logoContainer desktopOnly">
@@ -120,7 +142,11 @@ export default function Login() {
             }
             validationMessage="The passwords do not match"
           />
-          <Button type="submit" text="Signup" disabled={!formValidation()} />
+          <Button
+            type="submit"
+            text="Signup"
+            disabled={!formValidation() || isSubmitting}
+          />
         </form>
         <div className="loginFooter">
           <p>Already have an account?</p>
