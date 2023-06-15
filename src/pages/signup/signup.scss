@@ -1,0 +1,20 @@
+.signupSection {
+  .imageUploaderContainer {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 48px;
+
+    &::after {
+      content: url("/icons/camera.svg");
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      right: 0;
+      left: 90px;
+      bottom: 0px;
+      margin:auto
+    }
+  }
+  
+}

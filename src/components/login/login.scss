@@ -1,0 +1,84 @@
+.publicPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 32px;
+
+  .logoContainer {
+    position: relative;
+    height: 13%;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .loginInfoContainer {
+    width: 100%;
+  }
+
+  .btn {
+    margin-top: 15px;
+    padding: 10px;
+  }
+
+  .loginFooter {
+    text-align: center;
+    margin-top: 24px;
+
+    p {
+      color: $gray3;
+      margin: 0px 0px 2px;
+    }
+
+    a {
+      color: $primaryColor;
+      text-decoration: underline;
+      font-family: $boldFont;
+    }
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    flex-direction: row;
+    padding: 0 140px;
+    
+  
+    input{
+      font-size: 16px;
+    }
+
+    .logoContainer {
+      flex: 2;
+      height: 30%;
+      margin-bottom: -30px;
+      
+      .logo{
+        width: 100%;
+        max-width: 376px;
+      }
+    }
+
+    .loginInfoContainer {
+      flex: 1;
+      border: 1px solid $primaryColor;
+      border-radius: 26px;
+      padding: 50px;
+    }
+    
+    .btn {
+      // margin-top: 15px;
+      padding: 18px;
+      font-size: 18px;
+    }
+
+    .loginFooter {
+      text-align: center;
+      margin-top: 24px;
+
+      p,
+      a {
+        font-size: 18px;
+      }
+    }
+  }
+}

@@ -2,11 +2,7 @@
   background-color: $primaryColor;
   color: $white;
 }
-@mixin disabledButton {
-  background-color: $gray;
-  color: $white;
-  cursor: not-allowed;
-}
+
 @mixin invertedButton {
   background-color: $white;
   color: $primaryColor;
@@ -18,8 +14,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  width: 50%;
-  transition: background-color 0.15s, color 0.15s;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 
   &.primary {
     @include primaryButton;
@@ -37,10 +32,9 @@
   }
 
   &:disabled {
-    background-color: $gray;
-    color: $white;
+    opacity: 0.5;
     cursor: not-allowed;
-  }
+    }
 }
 
 @import "@/styles/vars.scss";

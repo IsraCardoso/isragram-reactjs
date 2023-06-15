@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 export default function ImageUploader({
@@ -9,18 +10,18 @@ export default function ImageUploader({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (!inputRef?.current) {
+    if (!onSetReference) {
       return;
     }
     onSetReference(inputRef?.current);
-  }, [!inputRef?.current]);
+  }, [inputRef?.current]);
 
   const onClickUploadContainer = () => {
     inputRef?.current?.click();
   };
 
   const onSelectImage = () => {
-    if (!inputRef?.current?.files[0]) {
+    if (!inputRef?.current?.files?.length) {
       return;
     }
     const rawFile = inputRef?.current?.files[0];
@@ -41,7 +42,9 @@ export default function ImageUploader({
     >
       {imagePreview && (
         <div className="imagePreviewContainer">
-          <img
+          <Image
+          width={120}
+          height={120}
             src={imagePreview}
             alt="preview"
             className={`${previewVariant}`}

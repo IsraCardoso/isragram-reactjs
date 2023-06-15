@@ -5,7 +5,7 @@
   font-size: 14px;
 }
 
-.avatar{
+.avatar {
   border-radius: 50%;
   object-fit: cover;
 }
@@ -14,6 +14,48 @@
   display: none;
 }
 
+.html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+}
+
+input {
+  &::placeholder {
+    /* chrome, opera, safari e firefox */
+    color: $gray2;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    /*ie 10-11*/
+    color: $gray2;
+  }
+
+  &::-ms-input-placeholder {
+    color: $gray2;
+  }
+}
+
+.desktopOnly {
+    display: block;
+
+  @media screen and (max-width: calc($desktopBreakpoint - 1px)) {
+    display: none;
+  }
+}
+
+.mobileOnly {
+  display: block;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: none;
+  }
+}
 
 @import "#/fonts/fonts.scss";
 @import "@/components/button/button.scss";
+@import "@/components/login/login.scss";
+@import "@/components/publicInput/publicInput.scss";
+@import "@/pages/signup/signup.scss";

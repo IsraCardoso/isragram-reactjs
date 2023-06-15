@@ -1,0 +1,35 @@
+.publicInputContainer {
+  .publicInput {
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $primaryColor;
+    margin-bottom: 25px;
+  }
+  input {
+    border: 0;
+    outline: none;
+    flex: 1;
+    color: $primaryColor;
+    margin-left: 12px;
+    // &::placeholder {
+    //   /* chrome, opera, safari e firefox */
+    //   color: $gray2;
+    //   opacity: 1;
+    // }
+
+    // &:-ms-input-placeholder {
+    //   /*ie 10-11*/
+    //   color: $gray2;
+    // }
+
+    // &::-ms-input-placeholder {
+    //   color: $gray2;
+    // }
+  }
+  .validationMessage {
+    color: $red;
+    font-size: 85%;
+    margin-top: -20px;
+    margin-bottom: 15px;
+  }
+}
