@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 
 const UserServiceInstance = new UserService();
 
-export default function Login() {
+export default function Signup() {
   const route = useRouter();
   const [signupAvatar, setSignupAvatar] = useState(null);
   const [signupName, setSignupName] = useState("");
