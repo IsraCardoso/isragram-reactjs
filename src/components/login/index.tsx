@@ -8,10 +8,13 @@ import Button from "@/components/button";
 import Link from "next/link";
 import { validateEmail, validatePassword } from "@/utils/validators";
 import UserService from "@/services/UserService";
+import { useRouter } from "next/router";
 
 const UserServiceInstance = new UserService();
 
-export default function Login() {
+export default function Login({ afterLogin }) {
+  const router = useRouter();
+
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,7 +35,8 @@ export default function Login() {
         login: loginEmail,
         password: loginPassword,
       });
-      alert("Login successful!");
+      afterLogin();
+      router.push("/");
     } catch (error) {
       alert("Erro ao realizar o login. " + error?.response?.data?.error);
     }

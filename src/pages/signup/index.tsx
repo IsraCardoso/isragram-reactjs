@@ -17,10 +17,12 @@ import {
   validatePasswordConfirmation,
 } from "@/utils/validators";
 import UserService from "@/services/UserService";
+import { useRouter } from "next/router";
 
 const UserServiceInstance = new UserService();
 
 export default function Login() {
+  const route = useRouter();
   const [signupAvatar, setSignupAvatar] = useState(null);
   const [signupName, setSignupName] = useState("");
   const [signupUsername, setSignupUsername] = useState("");
@@ -57,8 +59,11 @@ export default function Login() {
       RegisterBody.append("password", signupPassword);
       console.log(RegisterBody);
       await UserServiceInstance.register(RegisterBody);
-      alert("Account created successfully!");
-      //agora autenticar
+      await UserServiceInstance.login({
+        login: signupEmail,
+        password: signupPassword,
+      });
+      route.push("/");
     } catch (error) {
       alert(`Error trying to sign up. ` + error?.response?.data?.error);
     }
