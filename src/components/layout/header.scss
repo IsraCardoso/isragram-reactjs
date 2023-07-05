@@ -1,0 +1,108 @@
+.mainHeader {
+  border-bottom: 0.5px solid $gray1;
+  position: relative;
+
+  .mainHeaderContent {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    position: relative;
+
+    .mainHeaderLogo {
+      width: 140px;
+      position: relative;
+    }
+
+    .mainHeaderSearhBar {
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
+      position: relative;
+
+      .searchBarMagnifyingGlass {
+        position: absolute;
+        left: 8px;
+      }
+
+      input {
+        background-color: $primaryColor4;
+        border: none;
+        padding: 8px 8px 8px 36px;
+        font-size: 12px;
+        border-radius: 4px;
+        font-family: $lightFont;
+        color: $primaryColor;
+
+        &:focus {
+          border: 1px solid $primaryColor;
+        }
+      }
+    }
+  }
+
+  .searchResultsContainer {
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+    background-color: $white;
+
+    .searchResult {
+      display: flex;
+      padding: 10px 16px;
+
+      &:hover {
+        background-color: $gray1;
+      }
+      .avatar {
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+      }
+      .userInfo {
+        > * {
+          display: block;
+          font-size: 12px;
+          color: $gray4;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    .mainHeaderContent {
+      display: flex;
+      align-items: center;
+      position: relative;
+      max-width: 60%;
+      margin: auto;
+      .mainHeaderLogo {
+        width: 200px;
+      }
+      .mainHeaderSearhBar {
+        flex: 0.9;
+        margin: 0px 5px 0px 30px;
+      }
+      input {
+        width: 100%;
+      }
+      .navigationBar {
+        ul {
+          li {
+            margin: 0px 0px 0px 40px;
+          }
+        }
+      }
+    }
+    .searchResultsContainer {
+      position: absolute;
+      cursor: pointer;
+      width: 20%;
+      z-index: 5;
+      background-color: $white;
+      box-shadow: 0px 4px 5px $gray1;
+      margin: auto;
+      left: 0;
+      right: 0;
+    }
+  }
+}

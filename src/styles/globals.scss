@@ -38,8 +38,22 @@ input {
   }
 }
 
+.navigationBar {
+  ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 10px 0px;
+
+    li {
+      list-style: none;
+      cursor: pointer;
+    }
+  }
+}
+
 .desktopOnly {
-    display: block;
+  display: block;
 
   @media screen and (max-width: calc($desktopBreakpoint - 1px)) {
     display: none;
@@ -54,8 +68,11 @@ input {
   }
 }
 
+
 @import "#/fonts/fonts.scss";
 @import "@/components/button/button.scss";
 @import "@/components/login/login.scss";
 @import "@/components/publicInput/publicInput.scss";
 @import "@/pages/signup/signup.scss";
+@import "@/components/layout/mobileFooter.scss";
+@import "@/components/layout/header.scss";
