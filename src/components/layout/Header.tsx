@@ -4,55 +4,53 @@ import Image from "next/image";
 import NavBar from "@/components/layout/NavBar";
 import { useState } from "react";
 import SearchResultsLayout from "./SearchResultsLayout";
+import UserService from "@/services/UserService";
+import { useRouter } from "next/router";
+
+const UserServiceInstance = new UserService();
 
 export default function Header() {
+  const router = useRouter();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const onSearchTermChange = (e) => {
+  const onSearchTermChange = async (e) => {
     setSearchTerm(e.target.value);
     setSearchResults([]);
     if (searchTerm.length < 3) {
       return;
     }
-    setSearchResults([
-      {
-        avatar: "",
-        username: "Douglas",
-        email: "douglas@devagram.com",
-        _id: "3242432",
-      },
-      {
-        avatar: "",
-        username: "Daniel",
-        email: "daniel@devagram.com",
-        _id: "8908790879",
-      },
-    ]);
+    try {
+      const { data } = await UserServiceInstance.searchUsers(e.target.value);
+      setSearchResults(data);
+    } catch (error) {
+      alert("Erro ao realizar pesquisa. " + error?.response?.data?.error);
+    }
   };
   const onClickOnSearchResults = (id) => {
-    console.log(id);
+    setSearchTerm("");
+    setSearchResults([]);
+    router.push(`/profile/${id}`);
   };
+
+  const redirectToHome = () => {
+    router.push("/");
+  }
 
   return (
     <header className="mainHeader">
       <div className="mainHeaderContent">
         <div className="mainHeaderLogo">
-          <Image src={headerLogo} alt="Logo" />
+          <Image src={headerLogo} alt="Logo" onClick={()=> redirectToHome()}/>
         </div>
         <div className="mainHeaderSearhBar">
           <div className="searchBarMagnifyingGlass">
-            <Image
-              src={searchMagnifyingGlass}
-              alt="search"
-              onClick={() => {}}
-            />
+            <Image src={searchMagnifyingGlass} alt="search" />
           </div>
           <input
             type="text"
-            onChange={(e) => {
-              onSearchTermChange(e);
-            }}
+            onChange={onSearchTermChange}
             placeholder="Search"
             value={searchTerm}
           />
@@ -68,7 +66,7 @@ export default function Header() {
               avatar={r.avatar}
               username={r.username}
               email={r.email}
-              onClick={()=> onClickOnSearchResults(r._id)}
+              onClick={() => onClickOnSearchResults(r._id)}
             />
           ))}
         </div>

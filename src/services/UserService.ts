@@ -25,4 +25,8 @@ export default class UserService extends HttpService {
   isAuthenticated() {
     return !!localStorage.getItem("loggedUserToken");
   }
+
+  searchUsers(searchTerm: string) {
+    return this.get("/search?filter="+ searchTerm);
+  }
 }
