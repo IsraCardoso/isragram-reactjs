@@ -15,14 +15,15 @@ export default function WithAuth(Component) {
         router.replace("/");
         return null;
       }
+      const authenticatedUser = UserServiceInstance.getAuthenticatedUserInfo();
       return (
         <>
-          <Header />
-          <Component {...props} />
-          <MobileFooter  /> {/*only if mobile*/}
+          <Header authenticatedUser={authenticatedUser} />
+          <Component authenticatedUser={authenticatedUser} {...props} />
+          <MobileFooter authenticatedUser={authenticatedUser} />
         </>
-      )
+      );
     }
     // return null;
-  }
+  };
 }

@@ -10,6 +10,6 @@ const nextConfig = {
 module.exports = nextConfig
 module.exports = {
   images: {
-    domains: ['cdn.cosmicjs.com'],
+    domains: ['cdn.cosmicjs.com', 's1.static.brasilescola.uol.com.br', 'cdn.pixabay.com'],
   },
 }

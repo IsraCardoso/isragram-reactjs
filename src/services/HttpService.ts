@@ -10,7 +10,7 @@ export default class HttpService {
 
     this.axios.interceptors.request.use(
       (config) => {
-        const loggedUserToken = localStorage.getItem("loggedUserToken");
+        const loggedUserToken = localStorage.getItem("authenticatedUserToken");
         if (loggedUserToken) {
           config.headers.Authorization = `Bearer ${loggedUserToken}`;
         }

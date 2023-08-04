@@ -68,6 +68,28 @@ input {
   }
 }
 
+.strong {
+  font-family: $boldFont;
+}
+
+body{
+  @media screen and (min-width: $desktopBreakpoint) {
+    background-color: $gray5;
+    background-image: url('/icons/imagemDeFundoDesktop.svg');
+    .mainHeader{
+      background-color: $white;
+    }
+  }
+  
+}
+
+.largura30pctDesktop {
+  @media screen and (min-width: $desktopBreakpoint) {
+    width: 30%;
+    margin: auto;
+  }
+}
+
 
 @import "#/fonts/fonts.scss";
 @import "@/components/button/button.scss";
@@ -76,3 +98,4 @@ input {
 @import "@/pages/signup/signup.scss";
 @import "@/components/layout/mobileFooter.scss";
 @import "@/components/layout/header.scss";
+@import "@/components/feed/feed.scss";

@@ -1,9 +1,8 @@
 import WithAuth from "@/hoc/WithAuth";
+import HomeFeed from "../feed";
 
-function Home() {
-  return (
-      <h1>Home</h1>
-  );
+function Home({authenticatedUser}) {
+  return <HomeFeed authenticatedUser={authenticatedUser} />;
 }
 
 export default WithAuth(Home);

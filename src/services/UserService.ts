@@ -3,18 +3,24 @@ import HttpService from "./HttpService";
 export default class UserService extends HttpService {
   async login(loginData) {
     const { data } = await this.post("/login", loginData);
-    localStorage.setItem("loggedUserName", data.name);
-    localStorage.setItem("loggedUserEmail", data.email);
-    localStorage.setItem("loggedUserToken", data.token);
+    localStorage.setItem("authenticatedUserName", data.name);
+    localStorage.setItem("authenticatedUserEmail", data.email);
+    localStorage.setItem("authenticatedUserToken", data.token);
     if (data.avatar) {
-      localStorage.setItem("loggedUserAvatar", data.avatar);
+      localStorage.setItem("authenticatedUserAvatar", data.avatar);
     }
 
-    const loggedUser = await this.get("/user");
-    localStorage.setItem("loggedUserUsername", loggedUser.data.username);
-    localStorage.setItem("loggedUserId", loggedUser.data._id);
-    if (loggedUser.data.avatar) {
-      localStorage.setItem("loggedUserAvatar", loggedUser.data.avatar);
+    const authenticatedUser = await this.get("/user");
+    localStorage.setItem(
+      "authenticatedUserUsername",
+      authenticatedUser.data.username
+    );
+    localStorage.setItem("authenticatedUserId", authenticatedUser.data._id);
+    if (authenticatedUser.data.avatar) {
+      localStorage.setItem(
+        "authenticatedUserAvatar",
+        authenticatedUser.data.avatar
+      );
     }
   }
 
@@ -23,10 +29,20 @@ export default class UserService extends HttpService {
   }
 
   isAuthenticated() {
-    return !!localStorage.getItem("loggedUserToken");
+    return !!localStorage.getItem("authenticatedUserToken");
   }
 
   searchUsers(searchTerm: string) {
-    return this.get("/search?filter="+ searchTerm);
+    return this.get("/search?filter=" + searchTerm);
+  }
+
+  getAuthenticatedUserInfo() {
+    return {
+      id: localStorage.getItem("authenticatedUserId"),
+      name: localStorage.getItem("authenticatedUserName"),
+      username: localStorage.getItem("authenticatedUserUsername"),
+      email: localStorage.getItem("authenticatedUserEmail"),
+      avatar: localStorage.getItem("authenticatedUserAvatar"),
+    };
   }
 }
