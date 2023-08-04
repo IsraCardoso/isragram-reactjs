@@ -1,7 +1,7 @@
 import emptyAvatar from "#/icons/avatar.svg";
 import Image from "next/image";
 
-export default function Avatar({ src, width , height }: any) {
+export default function Avatar({ src, width , height, fill }: any) {
   const getAvatar = () => {
     if (src && src !== "undefined") {
       return src;
@@ -14,8 +14,7 @@ export default function Avatar({ src, width , height }: any) {
       src={getAvatar()}
       alt="avatar"
       className="avatar"
-      width={width}
-      height={height}
+      fill
     />
   );
 }

@@ -24,6 +24,6 @@ export default function WithAuth(Component) {
         </>
       );
     }
-    // return null;
+    return null;
   };
 }

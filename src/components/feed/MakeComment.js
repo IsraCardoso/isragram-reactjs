@@ -1,15 +1,16 @@
 import Avatar from "../avatar";
 
 export default function MakeComment(authenticatedUser) {
-
+  console.log(authenticatedUser)
   return (
     <div className="makeCommentContainer">
-      <Avatar src={authenticatedUser.authenticatedUser.avatar} width={32} height={32} />
+      {JSON.stringify(authenticatedUser.authenticatedUser.avatar)}
+      <Avatar src={authenticatedUser.authenticatedUser.avatar}  />
       <textarea
         placeholder="Add a comment"
         rows={1}
       />
-
+      <></>
     </div>
   )
 }
